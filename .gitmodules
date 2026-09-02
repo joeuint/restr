@@ -1,3 +1,6 @@
 [submodule "vendor/FTXUI"]
 	path = vendor/FTXUI
 	url = https://github.com/ArthurSonzogni/FTXUI
+[submodule "vendor/curlpp"]
+	path = vendor/curlpp
+	url = https://github.com/jpbarrette/curlpp
