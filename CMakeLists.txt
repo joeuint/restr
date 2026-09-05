@@ -9,6 +9,12 @@ target_sources(restr PRIVATE src/main.cpp src/app.cpp src/ApiCollection.cpp src/
 add_subdirectory(vendor/FTXUI)
 add_subdirectory(vendor/curlpp)
 
+if (MSVC)
+	target_compile_options(restr PRIVATE /W4)
+else()
+	target_compile_options(restr PRIVATE -Wall -Wextra)
+endif()
+
 target_compile_features(restr PRIVATE cxx_std_23)
 
 target_link_libraries(restr PRIVATE ftxui::ftxui curlpp::curlpp_static)
