@@ -1,9 +1,8 @@
 #pragma once
-#include <memory>
-#include <string>
-
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
+#include <memory>
+#include <string>
 
 enum class RequestVerb {
     GET,
@@ -14,24 +13,19 @@ enum class RequestVerb {
 };
 
 class Response {
-public:
+   public:
     std::string body;
     int statusCode;
     double time;
 
-    Response(std::string body, int statusCode, double time): body(body), statusCode(statusCode), time(time) {};
+    Response(std::string body, int statusCode, double time)
+        : body(body), statusCode(statusCode), time(time) {};
 
-    std::string_view getBody() {
-        return body;
-    }
+    std::string_view getBody() { return body; }
 
-    int getStatusCode() {
-        return statusCode;
-    }
+    int getStatusCode() { return statusCode; }
 
-    double getTime() {
-        return time;
-    }
+    double getTime() { return time; }
 };
 
 class Request {
@@ -39,8 +33,9 @@ class Request {
     RequestVerb verb;
     curlpp::Easy handle;
 
-public:
-    Request(const std::string& name, RequestVerb verb) : name(name), verb(verb) {};
+   public:
+    Request(const std::string& name, RequestVerb verb)
+        : name(name), verb(verb) {};
 
     void setUrl(const std::string& url) {
         handle.setOpt(curlpp::Options::Url(url));
@@ -53,14 +48,9 @@ public:
         return url.getValue();
     }
 
-    std::string_view getName() {
-        return name;
-   }
+    std::string_view getName() { return name; }
 
-    RequestVerb getVerb() {
-        return verb;
-    }
+    RequestVerb getVerb() { return verb; }
 
     std::unique_ptr<Response> execute();
-    
 };
