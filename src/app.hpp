@@ -10,6 +10,7 @@ class RestrApp {
     void switchCollection(int& index, const ftxui::MenuOption& option, std::vector<std::string>& entries);
     std::vector<std::string> getCollectionNames();
     void getDocumentNames(int idx, std::vector<std::string>& docEntries);
+    void fireRequest(const int collectionIndex, const int docIndex);
 
 public:
 

@@ -26,6 +26,15 @@ void RestrApp::getDocumentNames(int idx, std::vector<std::string>& docEntries) {
   }
 }
 
+void RestrApp::fireRequest(const int collectionIndex, const int docIndex) {
+    const auto& collection { collections.at(collectionIndex) };
+
+    const auto& request { collection->getRequests().at(docIndex) };
+
+    const auto result = request->execute();
+}
+
+// TODO: Remove the option param
 void RestrApp::switchCollection(int& index, const ftxui::MenuOption& option,
                                 std::vector<std::string>& entries) {
   entries.clear();
@@ -45,14 +54,15 @@ void RestrApp::run() {
   int documentSelected{0};
 
   ftxui::MenuOption menuOption;
-  menuOption.on_enter = screen.ExitLoopClosure();
   menuOption.on_change = [&]() {
     switchCollection(selected, menuOption, documentEntries);
   };
   auto menu = ftxui::Menu(&entries, &selected, menuOption);
 
   ftxui::MenuOption documentOption;
-  documentOption.on_enter = screen.ExitLoopClosure();
+  documentOption.on_enter = [&] () {
+    fireRequest(selected, documentSelected);
+  };
 
   auto documentMenu =
       ftxui::Menu(&documentEntries, &documentSelected, documentOption);
