@@ -79,7 +79,7 @@ void RestrApp::run() {
                     menuWin | ftxui::border | ftxui::flex
                 }),
                 ftxui::vbox({
-                    ftxui::text("API Collections"),
+                    ftxui::text("Requests"),
                     docMenuWin | ftxui::border | ftxui::flex
                 }) | ftxui::flex
             }) | ftxui::flex,
